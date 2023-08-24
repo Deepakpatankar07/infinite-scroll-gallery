@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   images: [],
-  page: 1,
   hasMore: true,
+  page: 1,
+  query: "",
 };
 
-const unsplashReducer = createSlice({
-  name: "unsplash",
+const searchReducer = createSlice({
+  name: "search",
   initialState,
   reducers: {
     setImages: (state, action) => {
@@ -19,8 +20,11 @@ const unsplashReducer = createSlice({
     setHasMore: (state, action) => {
       state.hasMore = action.payload;
     },
+    setQuery: (state, action) => {
+      state.query = action.payload;
+    },
   },
 });
 
-export const { setImages, setPage, setHasMore } = unsplashReducer.actions;
-export default unsplashReducer.reducer;
+export const { setImages, setPage, setHasMore, setQuery } = searchReducer.actions;
+export default searchReducer.reducer;

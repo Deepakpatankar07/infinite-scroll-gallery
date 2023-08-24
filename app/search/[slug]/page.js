@@ -1,14 +1,18 @@
 "use client";
 
 import styles from "./page.module.css";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncSetImages } from "@/store/actions/unsplashAction";
+import { asyncSetImages } from "@/store/actions/searchAction";
+import { setQuery, setPage , setImages} from "@/store/reducers/searchReducers";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Home() {
+    const router = useRouter();
+  const { slug } = useParams();
   const dispatch = useDispatch();
-  const { images, hasMore } = useSelector((state) => state.unsplashReducer);
+  const { images, hasMore } = useSelector((state) => state.searchReducer);
 
   const [dets, setDets] = useState(-1);
   const [expandedIndex, setExpandedIndex] = useState(-1); // Track the expanded item index
@@ -22,6 +26,14 @@ export default function Home() {
   };
 
   const GetImages = () => dispatch(asyncSetImages());
+
+  useEffect(() => {
+    dispatch(setQuery(slug));
+    dispatch(setPage(1));
+    dispatch(setImages([]));
+    router.refresh();
+  }, [slug]);
+
   useEffect(() => {
     GetImages();
   }, []);
@@ -46,8 +58,10 @@ export default function Home() {
               }`}
               key={i}
             >
-              <button onMouseEnter={() => GetDetails(i)}
-              onMouseLeave={() => GetDetails(i)}>
+              <button
+                onMouseEnter={() => GetDetails(i)}
+                onMouseLeave={() => GetDetails(i)}
+              >
                 {dets === i && (
                   <div className={styles.MoreDetails}>
                     <div className={styles.detailsBtn}>↗</div>
