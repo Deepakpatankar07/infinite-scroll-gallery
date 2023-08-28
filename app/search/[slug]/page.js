@@ -1,21 +1,19 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncSetImages } from "@/store/actions/searchAction";
-import { setQuery, setPage , setImages} from "@/store/reducers/searchReducers";
-import { useParams, useRouter } from "next/navigation";
 
 export default function Home() {
-    const router = useRouter();
   const { slug } = useParams();
   const dispatch = useDispatch();
+  
   const { images, hasMore } = useSelector((state) => state.searchReducer);
-
   const [dets, setDets] = useState(-1);
-  const [expandedIndex, setExpandedIndex] = useState(-1); // Track the expanded item index
+  const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const GetDetails = (index) => {
     dets === index ? setDets(-1) : setDets(index);
@@ -25,15 +23,9 @@ export default function Home() {
     expandedIndex === index ? setExpandedIndex(-1) : setExpandedIndex(index);
   };
 
-  const GetImages = () => dispatch(asyncSetImages());
-
-  useEffect(() => {
-    dispatch(setQuery(slug));
-    dispatch(setPage(1));
-    dispatch(setImages([]));
-    router.refresh();
-  }, [slug]);
-
+  const GetImages = () => {
+    dispatch(asyncSetImages(slug))
+  };
   useEffect(() => {
     GetImages();
   }, []);

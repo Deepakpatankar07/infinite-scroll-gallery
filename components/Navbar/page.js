@@ -3,15 +3,18 @@
 import { useState } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setPage } from "@/store/reducers/searchReducers";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [slug, setSlug] = useState("");
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    console.log(slug)
     router.push(`/search/${slug}`);
+    dispatch(setPage(1));
     setSlug("");
   };
   return (
