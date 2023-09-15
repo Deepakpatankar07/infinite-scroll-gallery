@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BiSearch } from "react-icons/bi";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -20,10 +21,12 @@ const Navbar = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.navLogo}>
-        <h1>©</h1>
-        <h2>
-          Code By Deepak <span>Patankar</span>
-        </h2>
+        <p className={styles.copyright}>©</p>
+        <div className={styles.name}>
+          <p className={styles.codeby}>Code By</p>
+          <p className={styles.deepak}>Deepak</p>
+          <p className={styles.patankar}>Patankar</p>
+        </div>
       </div>
       <div className={styles.searchContainer}>
         <form onSubmit={SubmitHandler}>
@@ -33,7 +36,7 @@ const Navbar = () => {
             onChange={(e) => setSlug(e.target.value)}
             value={slug}
           />
-          <button>🔍</button>
+          <button><BiSearch/></button>
         </form>
       </div>
     </div>
