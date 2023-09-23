@@ -50,21 +50,25 @@
 .MoreDetails{
   width: fit-content;
   position: absolute;
-  bottom: 2.5%;
+  top: 2.5%;
   right: 5%;
 }
 .MoreDetails .detailsBtn{
-  background-color: #0000004f;
+  background-color: #00000030;
   border: none;
   color: rgba(237, 237, 237, 0.824);
-  font-size: 2.5vmax;
-  font-weight: bold;
+  font-size: 1.5vmax;
+  font-weight: 300;
   cursor: pointer;
-  padding: .5vmax 1.5vmax;
+  padding: 1vmax 1.3vmax;
   border-radius: 15%;
   transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .MoreDetails .detailsBtn:hover{
+  background-color: #0000004f;
   color: white;
 }
 .li button img {

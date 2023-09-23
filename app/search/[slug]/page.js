@@ -1,5 +1,6 @@
 "use client";
 
+import { BiHeart,BiSolidHeart } from "react-icons/bi";
 import styles from "./page.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "next/navigation";
@@ -56,7 +57,9 @@ export default function Home() {
               >
                 {dets === i && (
                   <div className={styles.MoreDetails}>
-                    <div className={styles.detailsBtn}>↗</div>
+                    <div className={styles.detailsBtn}>
+                      <BiHeart/>
+                    </div>
                   </div>
                 )}
                 <img
